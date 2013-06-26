@@ -1,0 +1,6 @@
+name = Better Login
+description = Make the login screens better :)
+
+package = User interface
+
+core = 7.x
