@@ -6,15 +6,23 @@
  * Make the login screens better :).
  */
 
+// TODO: This should probably be in hook_init? I don't know maybe one day. This works... o.O
 // Make sure that the user is not logged in.
 global $user;
 
 if (!$user->uid) {
+  // We need to collect where they were going in the first place because they may get pissed if 
+  // they don't get there after logging in :).
+  $destination = '';
+  if ($_GET['q']) {
+    $destination = array('destination' => $_GET['q']);
+  }
+
   // If this site is set to private we want to redirect all anonymous users to the login form.
   if (variable_get('betterlogin_private')) {
     // Because of Drush we only want to block anything not from CLI.
     if (arg(0) !== 'user' && php_sapi_name() !== 'cli') {
-      drupal_goto('user/login');
+      drupal_goto('user/login', array('query' => $destination));
     }
   }
   
@@ -32,8 +40,17 @@ if (!$user->uid) {
  */
 function betterlogin_form_alter(&$form, &$form_state, $form_id) {
   // Autofocus on the username field.
+  // And add some pretty CSS :).
+  // And a few other things too...
   if ($form_id == 'user_login' || $form_id == 'user_register_form' || $form_id == 'user_pass') {
     $form['name']['#attributes']['autofocus'] = 'autofocus';
+
+    // We don't really need descriptions to tell us what we already know...
+    unset($form['name']['#description']);
+    unset($form['pass']['#description']);
+
+    // Add in some CSS.
+    drupal_add_css(drupal_get_path('module', 'betterlogin') .'/css/betterlogin.css');
   }
 
   switch ($form_id) {
@@ -62,7 +79,7 @@ function betterlogin_theme_registry_alter(&$theme_registry) {
   $mod_path = drupal_get_path('module', 'betterlogin');
 
   $theme_registry_copy = $theme_registry;
-  _theme_process_registry($theme_registry_copy, 'phptemplate', 'theme_engine', 'bartik', $mod_path);
+  _theme_process_registry($theme_registry_copy, 'phptemplate', 'theme_engine','', $mod_path);
   $theme_registry += array_diff_key($theme_registry_copy, $theme_registry);
 
   $hooks = array('page');
