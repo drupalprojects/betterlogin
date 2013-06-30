@@ -23,7 +23,7 @@
   
   #auth_box input[type="text"],
   #auth_box input[type="password"] {
-    width: 255px;
+    width: 260px;
     border: 1px #ccc solid;
     border-radius: 3px;
     padding: 5px;

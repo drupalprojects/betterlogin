@@ -6,29 +6,33 @@
  * Make the login screens better :).
  */
 
-// TODO: This should probably be in hook_init? I don't know maybe one day. This works... o.O
-// Make sure that the user is not logged in.
-global $user;
+/**
+ * Implementation of hook_init().
+ */
+function betterlogin_init() {
+  // Make sure that the user is not logged in.
+  global $user;
 
-if (!$user->uid) {
-  // We need to collect where they were going in the first place because they may get pissed if 
-  // they don't get there after logging in :).
-  $destination = '';
-  if ($_GET['q']) {
-    $destination = array('destination' => $_GET['q']);
-  }
-
-  // If this site is set to private we want to redirect all anonymous users to the login form.
-  if (variable_get('betterlogin_private')) {
-    // Because of Drush we only want to block anything not from CLI.
-    if (arg(0) !== 'user' && php_sapi_name() !== 'cli') {
-      drupal_goto('user/login', array('query' => $destination));
+  if (!$user->uid) {
+    // We need to collect where they were going in the first place because they may get pissed if 
+    // they don't get there after logging in :).
+    $destination = '';
+    if ($_GET['q']) {
+      $destination = array('destination' => $_GET['q']);
     }
-  }
+
+    // If this site is set to private we want to redirect all anonymous users to the login form.
+    if (variable_get('betterlogin_private')) {
+      // Because of Drush we only want to block anything not from CLI.
+      if (arg(0) !== 'user' && php_sapi_name() !== 'cli') {
+        drupal_goto('user/login', array('query' => $destination));
+      }
+    }
   
-  // Make sure that anon users cannot go to just /user but directly to the login form.
-  if (arg(0) == 'user' && !arg(1)) {
-    drupal_goto('user/login');
+    // Make sure that anon users cannot go to just /user but directly to the login form.
+    if (arg(0) == 'user' && !arg(1)) {
+      drupal_goto('user/login');
+    }
   }
 }
 
