@@ -30,7 +30,7 @@ function betterlogin_init() {
     }
   
     // Make sure that anon users cannot go to just /user but directly to the login form.
-    if (arg(0) == 'user' && !arg(1)) {
+    if (arg(0) == 'user' && !arg(1) && php_sapi_name() !== 'cli') {
       drupal_goto('user/login');
     }
   }
