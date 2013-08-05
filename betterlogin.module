@@ -54,7 +54,7 @@ function betterlogin_form_alter(&$form, &$form_state, $form_id) {
     unset($form['pass']['#description']);
 
     // Add in some CSS.
-    drupal_add_css(drupal_get_path('module', 'betterlogin') .'/css/betterlogin.css');
+    $form['#attached']['css'][] = drupal_get_path('module', 'betterlogin') .'/css/betterlogin.css';
   }
 
   switch ($form_id) {
