@@ -17,7 +17,10 @@ function betterlogin_init() {
     // We need to collect where they were going in the first place because they may get pissed if 
     // they don't get there after logging in :).
     $destination = '';
-    if ($_GET['q']) {
+    if (isset($_GET['destination'])) {
+      $destination = drupal_get_destination();
+    }
+    else if (isset($_GET['q'])) {
       $destination = array('destination' => $_GET['q']);
     }
 
@@ -31,7 +34,11 @@ function betterlogin_init() {
   
     // Make sure that anon users cannot go to just /user but directly to the login form.
     if (arg(0) == 'user' && !arg(1) && php_sapi_name() !== 'cli') {
-      drupal_goto('user/login');
+      if (isset($destination)) {
+        unset($_GET['destination']);
+      }
+
+      drupal_goto('user/login', array('query' => $destination));
     }
   }
 }
