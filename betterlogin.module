@@ -53,7 +53,7 @@ function betterlogin_form_alter(&$form, &$form_state, $form_id) {
   // Autofocus on the username field.
   // And add some pretty CSS :).
   // And a few other things too...
-  if ($form_id == 'user_login' || $form_id == 'user_register_form' || $form_id == 'user_pass') {
+  if ($form_id == 'user_login' || $form_id == 'user_register_form' || $form_id == 'user_pass' || $form_id == 'user_pass_reset') {
     $form['name']['#attributes']['autofocus'] = 'autofocus';
 
     // We don't really need descriptions to tell us what we already know...
@@ -78,6 +78,10 @@ function betterlogin_form_alter(&$form, &$form_state, $form_id) {
 
     case 'user_pass':
       drupal_set_title(t('Forgot your password?'));
+      break;
+
+    case 'user_pass_reset':
+      drupal_set_title(t('Reset password'));
       break;
   }
 }
