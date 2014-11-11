@@ -1,7 +1,9 @@
 <div id="auth_box" class="register">
   <div id="top_part">
     <h1 id="the_logo">
-      <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>">
+      <a href="<?php print url('<front>'); ?>">
+        <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>">
+      </a>
     </h1>
   </div>
 
@@ -23,7 +25,7 @@
     </div>
 
     <div class="back_link">
-      <a href="<?php print url('<front>'); ?>">&larr; Back <?php print $site_name; ?></a>
+      <a href="<?php print url('<front>'); ?>">&larr; <?php print t('Back'); ?> <?php print $site_name; ?></a>
     </div>
   </div>
 </div>
