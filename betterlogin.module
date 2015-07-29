@@ -27,13 +27,13 @@ function betterlogin_init() {
     // If this site is set to private we want to redirect all anonymous users to the login form.
     if (variable_get('betterlogin_private')) {
       // Because of Drush we only want to block anything not from CLI.
-      if (arg(0) !== 'user' && php_sapi_name() !== 'cli') {
+      if (strtolower(arg(0)) !== 'user' && php_sapi_name() !== 'cli') {
         drupal_goto('user/login', array('query' => $destination));
       }
     }
   
     // Make sure that anon users cannot go to just /user but directly to the login form.
-    if (arg(0) == 'user' && !arg(1) && php_sapi_name() !== 'cli') {
+    if (strtolower(arg(0)) == 'user' && !arg(1) && php_sapi_name() !== 'cli') {
       if (isset($destination)) {
         unset($_GET['destination']);
       }
@@ -62,6 +62,14 @@ function betterlogin_form_alter(&$form, &$form_state, $form_id) {
 
     // Add in some CSS.
     $form['#attached']['css'][] = drupal_get_path('module', 'betterlogin') .'/css/betterlogin.css';
+  }
+  
+  // Exit if we're not on a target url, since the form may have been rendered programmatically.
+  // We don't want to change page titles on other pages.
+  // Array of arg(1) url values on target pages.
+  $pages = array('login', 'register', 'password', 'reset');
+  if(!in_array(arg(1), $pages)) { 
+    return; 
   }
 
   switch ($form_id) {
