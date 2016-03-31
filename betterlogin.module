@@ -35,7 +35,7 @@ function betterlogin_init() {
     $allowed_args = array('login', 'register', 'password', 'reset');
   
     // Make sure that anon users cannot go to just /user but directly to the login form.
-    if (strtolower(arg(0)) == 'user' && !in_array(strtolower(arg(1)) && php_sapi_name() !== 'cli') {
+    if (strtolower(arg(0)) == 'user' && !in_array(strtolower(arg(1), $allowed_args) && php_sapi_name() !== 'cli') {
       if (isset($destination)) {
         unset($_GET['destination']);
       }
