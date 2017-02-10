@@ -1,3 +1,10 @@
+<?php
+
+/**
+ * @file
+ * User reset page - Template file.
+ */
+?>
 <div id="auth_box" class="reset">
   <div id="top_part">
     <h1 id="the_logo">

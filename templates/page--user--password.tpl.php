@@ -1,3 +1,10 @@
+<?php
+
+/**
+ * @file
+ * User password page - Template file.
+ */
+?>
 <div id="auth_box" class="password">
   <div id="top_part">
     <h1 id="the_logo">
