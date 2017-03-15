@@ -6,6 +6,30 @@
  */
 
 /**
+ * Implements hook_help().
+ */
+function betterlogin_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#betterlogin':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Better Login module is used to remove issue of styling Drupal login/password/registration forms. It is slightly inspired by the way Wordpress login forms work, and uses three page templates to change the style of the forms. It is very simple to use, just install the Better Login module and it starts working immediately.') . '</p>';
+      $output .= '<p>' . t('For more information, see the <a href="https://www.drupal.org/project/betterlogin">BetterLogin module</a>.') . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<p>' . t('This module uses four templates:') . '</p>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('page--user--login.tpl.php') . '</li>';
+      $output .= '<li>' . t('page--user--password.tpl.php') . '</li>';
+      $output .= '<li>' . t('page--user--register.tpl.php') . '</li>';
+      $output .= '<li>' . t('page--user--reset.tpl.php') . '</li>';
+      $output .= '</ul>';
+      $output .= '<p>' . t('These sit in the /templates directory in the module. You can override them by copying the templates out of the module and into your theme directory.') . '</p>';
+      $output .= '<p>' . t('Alternatively if you are happy with the templates you can easily just alter the CSS styles in your theme.') . '</p>';
+      return $output;
+  }
+}
+
+/**
  * Implements hook_init().
  */
 function betterlogin_init() {
