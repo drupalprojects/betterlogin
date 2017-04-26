@@ -90,7 +90,7 @@ function betterlogin_theme_registry_alter(&$theme_registry) {
  */
 function betterlogin_preprocess_page(&$variables) {
   $variables['site_name'] = \Drupal::config('system.site')->get('name');
-  $variables['logo'] = '/core/themes/bartik/logo.svg';
+  $variables['logo'] = theme_get_setting('logo.url');
   $current_path = \Drupal::service('path.current')->getPath();
   switch ($current_path) {
     case '/user/login':
