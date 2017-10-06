@@ -82,6 +82,7 @@ function betterlogin_theme_registry_alter(&$theme_registry) {
     $theme_registry[$key]['path'] = $mod_path;
     $theme_registry[$key]['preprocess functions'][0] = 'betterlogin_preprocess_page';
     $theme_registry[$key]['preprocess functions'][1] = 'betterlogin_preprocess_html';
+    $theme_registry[$key]['type'] = 'base_theme_engine';
   }
 }
 
