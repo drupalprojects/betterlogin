@@ -66,24 +66,26 @@ function betterlogin_form_alter(&$form, FormStateInterface $form_state, $form_id
 }
 
 /**
- * Implements hook_theme_registry_alter().
+ * Implements hook_theme().
  */
-function betterlogin_theme_registry_alter(&$theme_registry) {
-  $pages = [
-    'page__user__login' => 'page--user--login',
-    'page__user__register' => 'page--user--register',
-    'page__user__password' => 'page--user--password',
-    'page__user__reset' => 'page--user--reset',
+function betterlogin_theme() {
+  $theme['page__user__login'] = [
+    'template' => 'page--user--login',
+    'base hook' => 'page',
   ];
-  $mod_path = drupal_get_path('module', 'betterlogin') . '/templates';
-
-  foreach ($pages as $key => $template) {
-    $theme_registry[$key]['template'] = $template;
-    $theme_registry[$key]['path'] = $mod_path;
-    $theme_registry[$key]['preprocess functions'][0] = 'betterlogin_preprocess_page';
-    $theme_registry[$key]['preprocess functions'][1] = 'betterlogin_preprocess_html';
-    $theme_registry[$key]['type'] = 'base_theme_engine';
-  }
+  $theme['page__user__register'] = [
+    'template' => 'page--user--register',
+    'base hook' => 'page',
+  ];
+  $theme['page__user__password'] = [
+    'template' => 'page--user--password',
+    'base hook' => 'page',
+  ];
+  $theme['page__user__reset'] = [
+    'template' => 'page--user--reset',
+    'base hook' => 'page',
+  ];
+  return $theme;
 }
 
 /**
