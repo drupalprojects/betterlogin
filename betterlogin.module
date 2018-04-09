@@ -48,7 +48,6 @@ function betterlogin_form_alter(&$form, FormStateInterface $form_state, $form_id
     // We don't really need descriptions to tell us what we already know...
     unset($form['name']['#description']);
     unset($form['pass']['#description']);
-    unset($form['user_picture']);
 
     // Add in some CSS.
     $form['#attached']['library'][] = 'betterlogin/betterlogin_css';
